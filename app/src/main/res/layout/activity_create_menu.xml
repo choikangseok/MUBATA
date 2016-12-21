@@ -96,7 +96,86 @@
                 android:text=""
                 android:id="@+id/exer_cose"
                 android:textSize="15dp"
+                android:visibility="gone"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp">
+                
+                <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="0.5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="난이도"
+                        android:textSize="13dp"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@android:color/darker_gray"
+                        android:text=""
+                        android:id="@+id/exer_difficulty"
+                        android:textSize="13dp"
+                        />
+                </LinearLayout>
+                <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="0.5dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="시간"
+                        android:textSize="13dp"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@android:color/darker_gray"
+                        android:text=""
+                        android:id="@+id/exer_time"
+                        android:textSize="13dp"
+                        />
+                </LinearLayout>
+                <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="운동명"
+                        android:textSize="13dp"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@android:color/darker_gray"
+                        android:text=""
+                        android:id="@+id/exer_name"
+                        android:textSize="13dp"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+            
         </LinearLayout>
 
         <LinearLayout android:layout_weight="1"

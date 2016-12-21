@@ -21,24 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateMenu" />
-        <activity android:name=".PlayTabata" />
+        <activity android:name=".CreateMenu"  android:screenOrientation="portrait"/>
+        <activity android:name=".PlayTabata" android:screenOrientation="portrait"/>
 
         <service
             android:name=".MusicService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Movie" />
-        <activity android:name=".StopWatch" />
-        <activity android:name=".LapTime" />
+        <activity android:name=".Movie" android:screenOrientation="portrait"/>
+        <activity android:name=".StopWatch" android:screenOrientation="portrait"/>
 
         <service
             android:name=".MyBoundService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Exer_follow"></activity>
+        <activity android:name=".Exer_follow" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

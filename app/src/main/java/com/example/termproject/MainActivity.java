@@ -24,6 +24,7 @@ import android.widget.Toast;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
     TextView gotofollomovie;
     TextView gotostopwatch;
 
-    TextView gotoLeg;
-    TextView gotoArm;
+    TextView gotosquart;
+    TextView gotopress;
+    TextView gotolift;
+    TextView gotoclean;
+    TextView gototeok;
 
     Button slide_close;
 
@@ -83,16 +87,19 @@ public class MainActivity extends AppCompatActivity {
         gotofollomovie = (TextView)findViewById(R.id.followmovie);
         gotostopwatch = (TextView)findViewById(R.id.stopwatch);
 
-        gotoArm = (TextView)findViewById(R.id.arm);
-        gotoLeg = (TextView)findViewById(R.id.leg);
+        gotosquart = (TextView)findViewById(R.id.squart);
+        gotopress = (TextView)findViewById(R.id.press);
+        gotolift = (TextView)findViewById(R.id.lift);
+        gotoclean = (TextView)findViewById(R.id.clean);
+        gototeok = (TextView)findViewById(R.id.teok);
 
         slide_close = (Button)findViewById(R.id.slideclose);
 
-        gotoLeg.setOnClickListener(new View.OnClickListener() {
+        gotosquart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Movie.class);
-                intent.putExtra("Part_Name", "Leg");
+                intent.putExtra("Part_Name", "squart");
                 startActivity(intent);
                 slidingPage.setVisibility(View.GONE);
                 slidingPose.setVisibility(View.GONE);
@@ -101,11 +108,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        gotoArm.setOnClickListener(new View.OnClickListener() {
+        gotopress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Movie.class);
-                intent.putExtra("Part_Name", "Arm");
+                intent.putExtra("Part_Name", "press");
+                startActivity(intent);
+                slidingPage.setVisibility(View.GONE);
+                slidingPose.setVisibility(View.GONE);
+                slidingPose.startAnimation(translateUpAnim);
+                slidingPage.startAnimation(translateRightAnim);
+            }
+        });
+        gotolift.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Movie.class);
+                intent.putExtra("Part_Name", "lift");
+                startActivity(intent);
+                slidingPage.setVisibility(View.GONE);
+                slidingPose.setVisibility(View.GONE);
+                slidingPose.startAnimation(translateUpAnim);
+                slidingPage.startAnimation(translateRightAnim);
+            }
+        });
+        gotoclean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Movie.class);
+                intent.putExtra("Part_Name", "clean");
+                startActivity(intent);
+                slidingPage.setVisibility(View.GONE);
+                slidingPose.setVisibility(View.GONE);
+                slidingPose.startAnimation(translateUpAnim);
+                slidingPage.startAnimation(translateRightAnim);
+            }
+        });
+        gototeok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Movie.class);
+                intent.putExtra("Part_Name", "teok");
                 startActivity(intent);
                 slidingPage.setVisibility(View.GONE);
                 slidingPose.setVisibility(View.GONE);
@@ -263,6 +306,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             textviewHtmlDocument = (TextView)findViewById(R.id.today);
+            totals = totals.replaceFirst("<strong>", "");
+            totals = totals.replaceFirst("</strong>", "");
             textviewHtmlDocument.setText(totals);
         }
     }

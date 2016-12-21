@@ -39,7 +39,11 @@ public class CreateMenu extends AppCompatActivity {
     Button Save;
     Button Exit;
 
+    TextView exercourse;
+    TextView exertime;
+    TextView exername;
     TextView exercose;
+
     String Effort;
     String Minutes;
     String Seconds;
@@ -54,6 +58,10 @@ public class CreateMenu extends AppCompatActivity {
 
         muname = (TextView)findViewById(R.id.musicname);
         exercose= (TextView)findViewById(R.id.exer_cose);
+        exercourse = (TextView)findViewById(R.id.exer_difficulty);
+        exertime = (TextView)findViewById(R.id.exer_time);
+        exername = (TextView)findViewById(R.id.exer_name);
+
         spinmus = (Spinner)findViewById(R.id.spin1);
         spinEffort = (Spinner)findViewById(R.id.Effort_edit_effort_level);
         spinMinutes = (Spinner)findViewById(R.id.exercise_edit_minutes);
@@ -82,6 +90,11 @@ public class CreateMenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Effort = spinnerlistEffort.get(position);
+                if(position == 2) {
+                    exer_name.setText("휴식");
+                } else {
+                    exer_name.setText("");
+                }
                 //exercose.setText(exercose.getText() + Effort);
             }
 
@@ -184,6 +197,10 @@ public class CreateMenu extends AppCompatActivity {
                 }else {
                     exercose.setText(
                             exercose.getText() + "" + Effort + "/" + Minutes + "/" + Seconds + "/" + exer_name.getText().toString() + "/\n");
+                    exercourse.setText(
+                            exercourse.getText() + Effort + "\n");
+                    exertime.setText(exertime.getText() + Minutes + "분 " + Seconds + "초\n");
+                    exername.setText(exername.getText() + exer_name.getText().toString() + "\n");
                     exer_name.setText("");
                 }
             }
