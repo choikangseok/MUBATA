@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import static com.example.termproject.R.id.Cname;
 import static com.example.termproject.R.id.count_txt;
+import static com.example.termproject.R.id.submenuarrow;
 import static com.example.termproject.R.id.tv;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
@@ -306,8 +307,11 @@ public class PlayTabata extends AppCompatActivity implements TextToSpeech.OnInit
                             if(result[N-2].equals("\nREST")) {
                                 Music_Ser.FadeOut();
                             }
-                            if(result[N-2].equals("\nHARD") || result[N-2].equals("\nEASY")) {
+                            if(result[N-2].equals("\nHARD")) {
                                 Music_Ser.FadeIn();
+                            }
+                            if(result[N-2].equals("\nEASY")) {
+                                Music_Ser.FadeIn2();
                             }
 
                             tView.setText("" + (millisUntilFinished / 1000 )/60 +" : " +
@@ -452,8 +456,11 @@ public class PlayTabata extends AppCompatActivity implements TextToSpeech.OnInit
                             if(result[N-2].equals("\nREST")) {
                                 Music_Ser.FadeOut();
                             }
-                            if(result[N-2].equals("\nHARD") || result[N-2].equals("\nEASY")) {
+                            if(result[N-2].equals("\nHARD")) {
                                 Music_Ser.FadeIn();
+                            }
+                            if(result[N-2].equals("\nEASY")) {
+                                Music_Ser.FadeIn2();
                             }
                             tView.setText("" + (millisUntilFinished / 1000 )/60 +" : " +
                                     (millisUntilFinished / 1000 )%60);
@@ -631,24 +638,51 @@ public class PlayTabata extends AppCompatActivity implements TextToSpeech.OnInit
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(bindState == true) {
+            unbindService(musicConnection);//바인드서비스를 해재해주고
+            stopService(new Intent(PlayTabata.this, MusicService.class));//서비스를 종료시켜준뒤
+            isCanceled = true;
+        }
+
         try {
             countDownTimer.cancel();
         } catch (Exception e) {
         }
         myTTS.shutdown();
         countDownTimer = null;
+
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if(bindState == true) {
-            unbindService(musicConnection);//바인드서비스를 해재해주고
-            stopService(new Intent(PlayTabata.this, MusicService.class));//서비스를 종료시켜준뒤
-            isCanceled = true;
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(bindState == true) {
+            Music_Ser.Pause();//음악을 일시정지시키고
+
+            //When user request to pause the CountDownTimer
+            isPaused = true;
+
+            //Enable the resume and cancel button
+            btnResume.setEnabled(true);
+            btnCancel.setEnabled(true);
+            //Disable the start and pause button
+            btnStart.setEnabled(false);
+            btnPause.setEnabled(false);
+            alphaS.setAlpha(50);
+            alphaR.setAlpha(255);
+            alphaP.setAlpha(50);
+            alphaC.setAlpha(255);
         }
     }
+
+
+
 
     private ServiceConnection musicConnection = new ServiceConnection() {
         // Service에 연결(bound)되었을 때 호출되는 callback 메소드
@@ -679,6 +713,5 @@ public class PlayTabata extends AppCompatActivity implements TextToSpeech.OnInit
 
     public void onInit(int status) {
     }
-
 
 }

@@ -94,12 +94,15 @@ public class MusicService extends Service {
     }
 
     public void FadeOut() {
-        player.setVolume(0.2f, 0.2f);
+        player.setVolume(0.15f, 0.15f);
        // volume += speed *deltaTime;
     }
     public void FadeIn()
     {
         player.setVolume(1, 1);
         //volume += speed * deltaTime;
+    }
+    public void FadeIn2() {
+        player.setVolume(0.5f,0.5f);
     }
 }
