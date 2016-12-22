@@ -2,12 +2,11 @@ package com.example.termproject;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,7 @@ public class StopWatch extends AppCompatActivity {
     boolean bindState = false;
 
     public boolean updating = true;
-
+    public boolean isplaying = false;
 
     private TextView timerText;
 
@@ -39,11 +38,11 @@ public class StopWatch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_watch);
         i = 1;
+
         Intent intent = new Intent(this, MyBoundService.class);
         startService(intent);
 
-        this.bindService(new Intent(this, MyBoundService.class),serviceConnection, Context.BIND_AUTO_CREATE);
-
+        bindService(new Intent(this, MyBoundService.class),serviceConnection, Context.BIND_AUTO_CREATE);
 
         this.timerText = (TextView) findViewById(R.id.timerText);
         this.startButton = (Button) findViewById(R.id.buttonStart);
@@ -54,10 +53,14 @@ public class StopWatch extends AppCompatActivity {
         this.lapLayout = (LinearLayout) findViewById(R.id.lapLayout);
         this.lapContainer = (LinearLayout) findViewById(R.id.lapContainer);
     }
+
     public void buttonStart(View view) {
+
         startButton.setVisibility(View.GONE);
         pauseButton.setVisibility(View.VISIBLE);
         lapButton.setVisibility(View.VISIBLE);
+
+        isplaying = true;
         myService.start();
 
         updating = true;
@@ -118,7 +121,9 @@ public class StopWatch extends AppCompatActivity {
         resetButton.setVisibility(View.GONE);
         lapContainer.setVisibility(View.GONE);
         lapLayout.removeAllViews();
+
         myService.reset();
+
         i = 1;
     }
 
@@ -157,6 +162,13 @@ public class StopWatch extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        if(isplaying == true) {
+            unbindService(serviceConnection);
+            Intent intent = new Intent(this, MyBoundService.class);
+            stopService(intent);
+            isplaying = false;
+        }
     }
 
     @Override
@@ -177,9 +189,13 @@ public class StopWatch extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        unbindService(serviceConnection);
-        Intent intent = new Intent(this, MyBoundService.class);
-        stopService(intent);
+        /*if(isplaying == true) {
+            unbindService(serviceConnection);
+            Intent intent = new Intent(this, MyBoundService.class);
+            stopService(intent);
+            isplaying = false;
+            updating = false;
+        }*/
     }
 
 }

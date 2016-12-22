@@ -9,11 +9,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="MUBATA"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
-            android:label="@string/app_name" android:screenOrientation="portrait">
+            android:label="MUBATA" android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,23 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateMenu"  android:screenOrientation="portrait"/>
-        <activity android:name=".PlayTabata" android:screenOrientation="portrait"/>
+        <activity android:label="MUBATA" android:name=".CreateMenu"  android:screenOrientation="portrait"/>
+        <activity android:label="MUBATA" android:name=".PlayTabata" android:screenOrientation="portrait"/>
 
         <service
             android:name=".MusicService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Movie" android:screenOrientation="portrait"/>
-        <activity android:name=".StopWatch" android:screenOrientation="portrait"/>
+        <activity android:label="MUBATA" android:name=".Movie" android:screenOrientation="portrait"/>
+        <activity android:label="MUBATA" android:name=".StopWatch" android:screenOrientation="portrait"/>
 
         <service
             android:name=".MyBoundService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Exer_follow" android:screenOrientation="portrait"></activity>
+        <activity android:label="MUBATA" android:name=".Exer_follow" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
